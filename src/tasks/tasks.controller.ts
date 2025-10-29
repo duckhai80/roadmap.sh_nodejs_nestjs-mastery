@@ -6,8 +6,8 @@ import {
   Param,
   Post,
 } from '@nestjs/common';
-import type { CreateTaskDto } from './create-task.dto';
-import type { Task } from './tasks.model';
+import { CreateTaskDto } from './create-task.dto';
+import { Task } from './tasks.model';
 import { TasksService } from './tasks.service';
 
 @Controller('tasks')
@@ -20,7 +20,7 @@ export class TasksController {
   }
 
   @Get(':id')
-  public findOne(@Param('id') id: string): Task {
+  public findOne(@Param('id') id: string) {
     const task = this.tasksService.findOne(id);
 
     if (!task) {
