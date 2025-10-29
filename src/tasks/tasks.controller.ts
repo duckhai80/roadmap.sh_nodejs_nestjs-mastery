@@ -1,5 +1,5 @@
-import { Controller, Get, Param } from '@nestjs/common';
-import { Task } from './tasks.model';
+import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
+import type { Task } from './tasks.model';
 import { TasksService } from './tasks.service';
 
 @Controller('tasks')
@@ -12,7 +12,13 @@ export class TasksController {
   }
 
   @Get(':id')
-  public findOne(@Param('id') id: string): Task | undefined {
-    return this.tasksService.findOne(id);
+  public findOne(@Param('id') id: string): Task {
+    const task = this.tasksService.findOne(id);
+
+    if (!task) {
+      throw new NotFoundException();
+    }
+
+    return task;
   }
 }
