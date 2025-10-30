@@ -37,3 +37,7 @@ Content-Type: {{contentType}}
 {
   "status": "IN_PROGRESS"
 }
+
+# Delete task
+DELETE  {{baseUrl}}/tasks/543cc859-179b-4edf-9b4a-4626182932e1
+

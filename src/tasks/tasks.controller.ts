@@ -1,7 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   NotFoundException,
   Param,
   Patch,
@@ -44,6 +47,14 @@ export class TasksController {
     task.status = body.status;
 
     return task;
+  }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  public remove(@Param() params: FindOneParams): void {
+    const task = this.findOneOrFail(params.id);
+
+    this.tasksService.remove(task.id);
   }
 
   private findOneOrFail(id: string): Task {
