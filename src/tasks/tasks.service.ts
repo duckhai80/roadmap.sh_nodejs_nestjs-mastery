@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'node:crypto';
 import { CreateTaskDto } from './create-task.dto';
 import { Task } from './tasks.model';
+import { UpdateTaskDto } from './update-task.dto';
 
 @Injectable()
 export class TasksService {
@@ -26,7 +27,15 @@ export class TasksService {
     return task;
   }
 
-  remove(id: string): void {
-    this.tasks = this.tasks.filter((task) => task.id !== id);
+  update(task: Task, updateTaskDto: UpdateTaskDto): Task {
+    Object.assign(task, updateTaskDto);
+
+    return task;
+  }
+
+  remove(task: Task): void {
+    this.tasks = this.tasks.filter(
+      (filteredTask) => filteredTask.id !== task.id,
+    );
   }
 }

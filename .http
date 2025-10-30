@@ -4,13 +4,14 @@
 
 {{baseUrl}}
 
-# Get all tasks
+### Get all tasks
 GET {{baseUrl}}/tasks
 
-# Get task
-GET {{baseUrl}}/tasks/cc142186-bc53-4f3c-bd3a-56c3c058e519
+### Get task
+GET {{baseUrl}}/tasks/{{taskId}}
 
-# Create new task
+### Create new task
+# @name createTask
 POST {{baseUrl}}/tasks
 Content-Type: {{contentType}}
 
@@ -20,7 +21,10 @@ Content-Type: {{contentType}}
   "status": "OPEN"
 }
 
-# Create new task
+### Set task id
+@taskId = {{createTask.response.body.id}}
+
+### Create new task
 POST {{baseUrl}}/tasks
 Content-Type: {{contentType}}
 
@@ -30,14 +34,14 @@ Content-Type: {{contentType}}
   "status": "XXX"
 }
 
-# Update task status
-PATCH {{baseUrl}}/tasks/cc142186-bc53-4f3c-bd3a-56c3c058e519/status
+### Update task status
+PATCH {{baseUrl}}/tasks/{{taskId}}/status
 Content-Type: {{contentType}}
 
 {
   "status": "IN_PROGRESS"
 }
 
-# Delete task
-DELETE  {{baseUrl}}/tasks/543cc859-179b-4edf-9b4a-4626182932e1
+### Delete task
+DELETE  {{baseUrl}}/tasks/{{taskId}}
 
