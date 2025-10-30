@@ -8,7 +8,7 @@
 GET {{baseUrl}}/tasks
 
 # Get task
-GET {{baseUrl}}/tasks/123
+GET {{baseUrl}}/tasks/cc142186-bc53-4f3c-bd3a-56c3c058e519
 
 # Create new task
 POST {{baseUrl}}/tasks
@@ -28,4 +28,12 @@ Content-Type: {{contentType}}
   "title": "Learn NestJS", 
   "description": "Complete the NestJS course",
   "status": "XXX"
+}
+
+# Update task status
+PATCH {{baseUrl}}/tasks/cc142186-bc53-4f3c-bd3a-56c3c058e519/status
+Content-Type: {{contentType}}
+
+{
+  "status": "IN_PROGRESS"
 }
