@@ -7,6 +7,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { CreateTaskDto } from './create-task.dto';
+import { FindOneParams } from './find-one.params';
 import { Task } from './tasks.model';
 import { TasksService } from './tasks.service';
 
@@ -20,8 +21,8 @@ export class TasksController {
   }
 
   @Get(':id')
-  public findOne(@Param('id') id: string) {
-    const task = this.tasksService.findOne(id);
+  public findOne(@Param() params: FindOneParams) {
+    const task = this.tasksService.findOne(params.id);
 
     if (!task) {
       throw new NotFoundException();
