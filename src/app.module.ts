@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { appConfig } from './config/app.config';
+import { appConfig, appConfigSchema } from './config/app.config';
 import { DummyService } from './dummy/dummy.service';
 import { LoggerService } from './logger/logger.service';
 import { MessageFormatterService } from './message-formatter/message-formatter.service';
@@ -12,6 +12,11 @@ import { TasksModule } from './tasks/tasks.module';
   imports: [
     ConfigModule.forRoot({
       load: [appConfig],
+      validationSchema: appConfigSchema,
+      validationOptions: {
+        // allowUnknown: false,
+        abortEarly: true,
+      },
     }),
     TasksModule,
   ],
