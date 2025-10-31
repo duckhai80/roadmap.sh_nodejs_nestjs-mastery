@@ -2,7 +2,7 @@
 @baseUrl = http://localhost:3000
 @contentType = application/json
 
-{{baseUrl}}
+GET {{baseUrl}}
 
 ### Get all tasks
 GET {{baseUrl}}/tasks
