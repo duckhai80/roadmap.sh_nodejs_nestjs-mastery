@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { appConfig, appConfigSchema } from './config/app.config';
+import { ConfigType } from './config/config.type';
 import { typeOrmConfig } from './config/database.config';
 import { DummyService } from './dummy/dummy.service';
 import { LoggerService } from './logger/logger.service';
@@ -11,6 +13,13 @@ import { TasksModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService<ConfigType>) => ({
+        ...(await configService.get('database')),
+      }),
+    }),
     ConfigModule.forRoot({
       load: [appConfig, typeOrmConfig],
       validationSchema: appConfigSchema,
